@@ -14,12 +14,6 @@
         <module>domain</module>
     </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.9</version>
-    </parent>
-
     <properties>
         <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -38,6 +32,12 @@
         <mockito.version>4.0.0</mockito.version>
         <testcontainers.version>1.13.0</testcontainers.version>
     </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.9</version>
+    </parent>
 
     <dependencyManagement>
         <dependencies>
