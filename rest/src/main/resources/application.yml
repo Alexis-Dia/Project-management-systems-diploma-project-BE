@@ -1,0 +1,23 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/projectmanagement
+    password: postgres
+  jpa:
+    open-in-view: 'true'
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/projectmanagement
+    user: postgres
+    password: postgres
+    baseline-on-migrate: true
+    locations: '/db/common,/db/test'
+    check-location: false
