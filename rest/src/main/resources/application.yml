@@ -10,6 +10,9 @@ spring:
   jpa:
     #to-do: think if it needs
     open-in-view: 'true'
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: validate
 
   flyway:
     url: jdbc:postgresql://localhost:5432/projectmanagement
