@@ -8,11 +8,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/projectmanagement
     password: postgres
   jpa:
+    #to-do: think if it needs
     open-in-view: 'true'
-    properties:
-      hibernate:
-        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
-    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
 
   flyway:
     url: jdbc:postgresql://localhost:5432/projectmanagement

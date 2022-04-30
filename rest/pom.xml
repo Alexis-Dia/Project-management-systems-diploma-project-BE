@@ -22,6 +22,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-boot-starter.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.project.management.system</groupId>
             <artifactId>service</artifactId>
             <version>${project.version}</version>
