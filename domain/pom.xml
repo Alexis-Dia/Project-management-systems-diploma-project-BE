@@ -20,6 +20,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.project.management.system</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>

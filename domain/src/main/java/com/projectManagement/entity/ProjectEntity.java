@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "project")
-public class AddressEntity implements Serializable {
+public class ProjectEntity implements Serializable {
 
   @Id
   @Column(name = "id")
@@ -38,9 +38,9 @@ public class AddressEntity implements Serializable {
   @Column(name = "create_date", nullable = false)
   private LocalDateTime createDate;
 
-  protected AddressEntity() {}
+  protected ProjectEntity() {}
 
-  public AddressEntity(
+  public ProjectEntity(
     String name,
     String comment,
     LocalDateTime createDate
@@ -80,6 +80,10 @@ public class AddressEntity implements Serializable {
 
   public void setCreateDate(LocalDateTime createDate) {
     this.createDate = createDate;
+  }
+
+  public Set<TaskEntity> getTasks() {
+    return tasks;
   }
 
   @Override
