@@ -150,9 +150,9 @@ public class DefaultUserService implements UserService {
         Optional<UserDto> userByLogin = this.findByLogin(userDto.getEmailAddress());
         userByLogin.ifPresent(ob -> {throw new UserAlreadyExistsException(MSG_ERR_USER_ALREADY_EXISTS);});
 
-        UserEntity userEntity = userRepository.findAllByIdAndStatus(userDto.getUserID(), DRIVER).orElse(
+        UserEntity userEntity = userRepository.findAllByIdAndRole(userDto.getUserID(), UserRole.USER).orElse(
             new UserEntity(userDto.getLastName(), userDto.getFirstName(), userDto.getPatronymic(), userDto.getBirthday(),
-                userDto.getEmailAddress(), userDto.getPassword(), INITIAL_MONEY_VALUE, userDto.getUserRole(), userDto.getUserStatus())
+                userDto.getEmailAddress(), userDto.getPassword(), INITIAL_MONEY_VALUE, UserRole.USER, UserStatus.FREE)
         );
 
         userRepository.save(userEntity);

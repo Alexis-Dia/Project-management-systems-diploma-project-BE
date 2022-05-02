@@ -1,6 +1,7 @@
 package com.projectManagement.repository;
 
 import com.projectManagement.entity.UserEntity;
+import com.projectManagement.entity.UserRole;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,11 +17,13 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAll();
 
-     List<UserEntity> findAllByStatus(String status);
+    List<UserEntity> findAllByStatus(String status);
 
     List<UserEntity> findAllByRole(String role);
 
-    Optional<UserEntity> findAllByIdAndStatus(Long id, String userRole);
+    Optional<UserEntity> findAllByIdAndStatus(Long id, String status);
+
+    Optional<UserEntity> findAllByIdAndRole(Long id, UserRole userRole);
 
     Optional<UserEntity> findByLogin(String login);
 
