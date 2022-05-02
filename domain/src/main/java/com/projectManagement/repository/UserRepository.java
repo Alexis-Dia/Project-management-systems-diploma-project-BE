@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAllByStatus(String status);
 
-    List<UserEntity> findAllByRole(String role);
+    List<UserEntity> findAllByRole(UserRole role);
 
     Optional<UserEntity> findAllByIdAndStatus(Long id, String status);
 

@@ -18,4 +18,5 @@ public interface Navigation {
   String PATH_USER_CHANGE_STATUS = "/user/changeStatus";
   String PATH_USER_DELETE = "/user/delete";
 
+  String PATH_PROJECT_LOAD = "/project/load";
 }

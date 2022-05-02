@@ -50,7 +50,7 @@ public class DefaultUserService implements UserService {
     @Override
     public List<UserDto> findAllDrivers() {
         final String driver = UserRole.USER.getName();
-        return userRepository.findAllByRole(driver).stream().map(DtoMapper::toUserDto).collect(Collectors.toList());
+        return userRepository.findAllByRole(UserRole.USER).stream().map(DtoMapper::toUserDto).collect(Collectors.toList());
     }
 
     @Override

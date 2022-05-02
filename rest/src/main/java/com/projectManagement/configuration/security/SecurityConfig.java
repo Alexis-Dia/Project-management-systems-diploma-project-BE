@@ -4,6 +4,7 @@ import static com.projectManagement.consts.Common.ROLE_ADMIN;
 import static com.projectManagement.consts.Common.ROLE_DRIVER;
 import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.PATH_AUTH_AUTHENTICATE;
+import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL_DRIVERS;
 import static com.projectManagement.rest.Navigation.PATH_USER_CHANGE_STATUS;
@@ -142,7 +143,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, PATH_USER_EDIT_ME).hasAuthority(ROLE_DRIVER)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_ME).hasAuthority(ROLE_DRIVER)
                 .antMatchers(HttpMethod.GET, PATH_USER_ALL).hasAuthority(ROLE_ADMIN)
-                .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_BY_ID).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_ADMIN).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.PUT, PATH_USER_EDIT).hasAuthority(ROLE_ADMIN)
@@ -150,8 +151,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, PATH_USER_DELETE).hasAuthority(ROLE_ADMIN)
 
                 //TODO: Fix it after chacking that login is working
-                .antMatchers(HttpMethod.POST, LOAD).hasAuthority(ROLE_DRIVER)
-                //.antMatchers(HttpMethod.GET, LOAD).anonymous()
+                .antMatchers(HttpMethod.POST, LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                //.antMatchers(HttpMethod.GET, LOAD).authenticated()
 
                 .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
                 //.antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous();
