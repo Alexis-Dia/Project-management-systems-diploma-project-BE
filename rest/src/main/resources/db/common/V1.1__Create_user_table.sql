@@ -14,9 +14,21 @@ CREATE TABLE IF NOT EXISTS users (
 /*PASSWORD - 12345678*/
 INSERT INTO USERS (id, last_name, first_name, patronymic, birthday, login, password, money, role, status)
 VALUES (1,
-        'Alexey',
+        'Aleksey',
+        'Alekseev',
+        'Alekseevich',
+        '2022-05-16 01:31:00.000000',
+        'admin@gmail.com',
+        '$2a$10$OOCcNwK5pLjah/ApkbvZfOsD0tzW37T6hbRY2PdbTCGAf0f1qiWT.',
+        0,
+        'ADMIN',
+        'FREE'
+);
+INSERT INTO USERS (id, last_name, first_name, patronymic, birthday, login, password, money, role, status)
+VALUES (2,
+        'Ivan',
         'Ivanov',
-        'Nikolaevich',
+        'Ivanovich',
         '2022-05-16 01:31:00.000000',
         'ivanov@gmail.com',
         '$2a$10$OOCcNwK5pLjah/ApkbvZfOsD0tzW37T6hbRY2PdbTCGAf0f1qiWT.',
