@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS users (
     birthday                            TIMESTAMP NOT NULL,
     login                               VARCHAR(100) NOT NULL,
     password                            VARCHAR(500) NOT NULL,
-    money                               float4,
+    money                               FLOAT4,
     role                                VARCHAR(100),
-    status                         VARCHAR(100)
+    status                              VARCHAR(100)
 );
 /*PASSWORD - 12345678*/
 INSERT INTO USERS (id, last_name, first_name, patronymic, birthday, login, password, money, role, status)

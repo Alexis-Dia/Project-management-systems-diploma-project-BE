@@ -4,6 +4,7 @@ import static com.projectManagement.consts.Common.ROLE_ADMIN;
 import static com.projectManagement.consts.Common.ROLE_DRIVER;
 import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.PATH_AUTH_AUTHENTICATE;
+import static com.projectManagement.rest.Navigation.PATH_PROJECT_CREATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL_DRIVERS;
@@ -151,8 +152,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, PATH_USER_DELETE).hasAuthority(ROLE_ADMIN)
 
                 //TODO: Fix it after chacking that login is working
-                .antMatchers(HttpMethod.POST, LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
-                //.antMatchers(HttpMethod.GET, LOAD).authenticated()
+                .antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAnyAuthority(ROLE_ADMIN)
 
                 .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
                 //.antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous();

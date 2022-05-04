@@ -25,7 +25,8 @@ public class DtoMapper {
     public static ProjectDto toProjectDto(ProjectEntity projectEntity) {
         if (projectEntity != null) {
             return new ProjectDto(projectEntity.getId(), projectEntity.getName(), projectEntity.getName(),
-              toApprovementDtoSet(projectEntity.getTasks()), projectEntity.getCreateDate());
+              toApprovementDtoSet(projectEntity.getTasks()), projectEntity.getCreateDate(), projectEntity.getHours(),
+              projectEntity.getPriority(), projectEntity.getBudget());
         }
         return null;
     }
@@ -41,4 +42,12 @@ public class DtoMapper {
         return null;
     }
 
+    public static ProjectEntity toProjectEntity(ProjectDto project) {
+        if (project != null) {
+            return new ProjectEntity(project.getName(), project.getName(),
+              project.getCreateDate(), project.getHours(),
+              project.getPriority(), project.getBudget());
+        }
+        return null;
+    }
 }

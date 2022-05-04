@@ -38,16 +38,31 @@ public class ProjectEntity implements Serializable {
   @Column(name = "create_date", nullable = false)
   private LocalDateTime createDate;
 
+  @Column(name = "hours")
+  private Float hours;
+
+  @Column(name = "priority")
+  private Integer priority;
+
+  @Column(name = "budget")
+  private Float budget;
+
   protected ProjectEntity() {}
 
   public ProjectEntity(
     String name,
     String comment,
-    LocalDateTime createDate
+    LocalDateTime createDate,
+    Float hours,
+    Integer priority,
+    Float budget
   ) {
     this.name = name;
     this.comment = comment;
     this.createDate = createDate;
+    this.hours = hours;
+    this.priority = priority;
+    this.budget = budget;
   }
 
   public Long getId() {
@@ -86,14 +101,29 @@ public class ProjectEntity implements Serializable {
     return tasks;
   }
 
+  public Float getHours() {
+    return hours;
+  }
+
+  public Integer getPriority() {
+    return priority;
+  }
+
+  public Float getBudget() {
+    return budget;
+  }
+
   @Override
   public String toString() {
-    return "AddressEntity{" +
-        "id=" + id +
-        ", tasks=" + tasks +
-        ", name='" + name + '\'' +
-        ", comment='" + comment + '\'' +
-        ", createDate=" + createDate +
-        '}';
+    return "ProjectEntity{" +
+      "id=" + id +
+      ", tasks=" + tasks +
+      ", name='" + name + '\'' +
+      ", comment='" + comment + '\'' +
+      ", createDate=" + createDate +
+      ", hours=" + hours +
+      ", priority=" + priority +
+      ", budget=" + budget +
+      '}';
   }
 }

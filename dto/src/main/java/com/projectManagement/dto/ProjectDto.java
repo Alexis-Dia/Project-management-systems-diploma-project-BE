@@ -15,6 +15,9 @@ public class ProjectDto {
   private final String comment;
   private final LocalDateTime createDate;
   private final Set<TaskDto> tasks;
+  private final Float hours;
+  private final Integer priority;
+  private final Float budget;
 
 //  public ProjectDto() {}
 
@@ -24,12 +27,19 @@ public class ProjectDto {
     @JsonProperty("name") String name,
     @JsonProperty("comment") String comment,
     @JsonProperty("tasks") Set<TaskDto> tasks,
-    @JsonProperty("createDate") @JsonFormat(pattern = DateUtils.JSON_DATE_TIME_FORMAT) LocalDateTime createDate) {
+    @JsonProperty("createDate") @JsonFormat(pattern = DateUtils.JSON_DATE_TIME_FORMAT) LocalDateTime createDate,
+    @JsonProperty("hours") Float hours,
+    @JsonProperty("priority") Integer priority,
+    @JsonProperty("budget") Float budget
+    ) {
     this.id = id;
     this.name = name;
     this.comment = comment;
     this.tasks = tasks;
     this.createDate = createDate;
+    this.hours = hours;
+    this.priority = priority;
+    this.budget = budget;
   }
 
   public Long getId() {
@@ -52,6 +62,18 @@ public class ProjectDto {
     return tasks;
   }
 
+  public Float getHours() {
+    return hours;
+  }
+
+  public Integer getPriority() {
+    return priority;
+  }
+
+  public Float getBudget() {
+    return budget;
+  }
+
   @Override
   public String toString() {
     return "ProjectDto{" +
@@ -60,6 +82,9 @@ public class ProjectDto {
       ", comment='" + comment + '\'' +
       ", createDate=" + createDate +
       ", tasks=" + tasks +
+      ", hours=" + hours +
+      ", priority=" + priority +
+      ", budget=" + budget +
       '}';
   }
 }

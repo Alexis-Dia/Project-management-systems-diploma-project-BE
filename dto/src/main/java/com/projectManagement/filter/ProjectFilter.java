@@ -22,6 +22,9 @@ public class ProjectFilter implements HasOrders, HasPageable {
   private final String comment;
   private final LocalDateTime createDate;
   private final Set<TaskDto> tasks;
+  private final Float hours;
+  private final Integer priority;
+  private final Float budget;
 
   @JsonCreator
   public ProjectFilter(
@@ -31,7 +34,10 @@ public class ProjectFilter implements HasOrders, HasPageable {
     @JsonProperty("name") String name,
     @JsonProperty("comment") String comment,
     @JsonProperty("tasks") Set<TaskDto> tasks,
-    @JsonProperty("createDate") @JsonFormat(pattern = DateUtils.JSON_DATE_TIME_FORMAT) LocalDateTime createDate) {
+    @JsonProperty("createDate") @JsonFormat(pattern = DateUtils.JSON_DATE_TIME_FORMAT) LocalDateTime createDate,
+    @JsonProperty("hours") Float hours,
+    @JsonProperty("priority") Integer priority,
+    @JsonProperty("budget") Float budget) {
     this.page = page;
     this.size = size;
     this.orders = orders;
@@ -39,6 +45,9 @@ public class ProjectFilter implements HasOrders, HasPageable {
     this.comment = comment;
     this.tasks = tasks;
     this.createDate = createDate;
+    this.hours = hours;
+    this.priority = priority;
+    this.budget = budget;
   }
 
   @Override
@@ -72,4 +81,15 @@ public class ProjectFilter implements HasOrders, HasPageable {
     return tasks;
   }
 
+  public Float getHours() {
+    return hours;
+  }
+
+  public Integer getPriority() {
+    return priority;
+  }
+
+  public Float getBudget() {
+    return budget;
+  }
 }

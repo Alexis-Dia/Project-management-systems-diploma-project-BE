@@ -2,7 +2,10 @@ package com.projectManagement.rest;
 
 public interface Navigation {
 
+  String USER = "/user";
+  String PROJECT = "/project";
   String LOAD = "/load";
+  String CREATE = "/create";
 
   String PATH_AUTH_AUTHENTICATE = "/auth/authenticate";
   String PATH_USER_SIGN_UP = "/user/signUp";
@@ -18,5 +21,6 @@ public interface Navigation {
   String PATH_USER_CHANGE_STATUS = "/user/changeStatus";
   String PATH_USER_DELETE = "/user/delete";
 
-  String PATH_PROJECT_LOAD = "/project/load";
+  String PATH_PROJECT_LOAD = PROJECT + LOAD;
+  String PATH_PROJECT_CREATE = PROJECT + CREATE;
 }

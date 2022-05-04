@@ -11,4 +11,6 @@ import java.util.List;
 public interface ProjectService {
 
   List<ProjectDto> findAll();
+
+  void createProject(ProjectDto project);
 }
