@@ -2,6 +2,7 @@ package com.projectManagement.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /*
 MSSQL has a list of reserved word uncluding word 'user'
@@ -45,6 +46,17 @@ public class UserEntity {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+//    @ManyToMany(mappedBy = "project")
+//    private Set<ProjectEntity> projects;
+
+    @ManyToMany
+    @JoinTable(name = "project_to_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private Set<ProjectEntity> projects;
+
+//    @OneToMany(cascade=CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    private Set<ProjectEntity> projects;
 
     public UserEntity() {
     }
@@ -158,19 +170,24 @@ public class UserEntity {
         this.status = userStatus;
     }
 
+    public Set<ProjectEntity> getProjects() {
+        return projects;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", patronymic='" + patronymic + '\'' +
-            ", birthday='" + birthday + '\'' +
-            ", login='" + login + '\'' +
-            ", password='" + password + '\'' +
-            ", money='" + money + '\'' +
-            ", userRole=" + role +
-            ", userStatus=" + status +
-            '}';
+        return "UserEntity{" +
+          "id=" + id +
+          ", lastName='" + lastName + '\'' +
+          ", firstName='" + firstName + '\'' +
+          ", patronymic='" + patronymic + '\'' +
+          ", birthday=" + birthday +
+          ", login='" + login + '\'' +
+          ", password='" + password + '\'' +
+          ", money=" + money +
+          ", role=" + role +
+          ", status=" + status +
+          //", projects=" + projects +
+          '}';
     }
 }

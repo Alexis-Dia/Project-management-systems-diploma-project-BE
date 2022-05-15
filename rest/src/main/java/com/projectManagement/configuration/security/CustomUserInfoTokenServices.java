@@ -1,5 +1,6 @@
 package com.projectManagement.configuration.security;
 
+import com.projectManagement.dto.ProjectDto;
 import com.projectManagement.dto.UserDto;
 import com.projectManagement.entity.UserRole;
 import com.projectManagement.entity.UserStatus;
@@ -115,7 +116,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 			{
 				Date birthDay = new GregorianCalendar(1990, Calendar.DECEMBER, 15).getTime();
 				UserDto userDto = new UserDto(1L, "Alex", "Nik", "Jack", birthDay,
-					"jackson@mail.com", "user", 0.0f, UserRole.USER, UserStatus.FREE);
+					"jackson@mail.com", "user", 0.0f, UserRole.USER, UserStatus.FREE, null);
 				userService.createNewUser(userDto);
 			}
 

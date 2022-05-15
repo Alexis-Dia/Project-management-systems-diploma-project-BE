@@ -12,5 +12,7 @@ public interface ProjectService {
 
   List<ProjectDto> findAll();
 
+  List<ProjectDto> findAllMineProjects(Long userId);
+
   void createProject(ProjectDto project);
 }

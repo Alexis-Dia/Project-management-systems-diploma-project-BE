@@ -2,14 +2,14 @@ package com.projectManagement.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.projectManagement.entity.UserRole;
 import com.projectManagement.entity.UserStatus;
 
 import java.util.Date;
+import java.util.Set;
 
 public class UserDto {
-
-    private static final long serialVersionUID = 1L;
 
     private Long userID;
 
@@ -31,6 +31,8 @@ public class UserDto {
 
     private UserStatus userStatus;
 
+    private Set<ProjectDto> projects;
+
     public UserDto() {
     }
 
@@ -39,8 +41,32 @@ public class UserDto {
         this.userID = userID;
     }*/
 
-    public UserDto(Long userID, String lastName, String firstName, String patronymic, Date birthday, String emailAddress,
-                   String password, Float money, UserRole userRole, UserStatus userStatus) {
+//    public UserDto(Long userID, String lastName, String firstName, String patronymic, Date birthday, String emailAddress,
+//                   String password, Float money, UserRole userRole, UserStatus userStatus) {
+//        this.userID = userID;
+//        this.lastName = lastName;
+//        this.firstName = firstName;
+//        this.patronymic = patronymic;
+//        this.birthday = birthday;
+//        this.emailAddress = emailAddress;
+//        this.password = password;
+//        this.money = money;
+//        this.userRole = userRole;
+//        this.userStatus = userStatus;
+//    }
+
+    @JsonCreator
+    public UserDto(@JsonProperty("id") Long userID,
+                   @JsonProperty("lastName") String lastName,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("patronymic") String patronymic,
+                   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday,
+                   @JsonProperty("emailAddress") String emailAddress,
+                   @JsonProperty("password") String password,
+                   @JsonProperty("money") Float money,
+                   @JsonProperty("userRole") UserRole userRole,
+                   @JsonProperty("userStatus") UserStatus userStatus,
+                   @JsonProperty("projects") Set<ProjectDto> projects) {
         this.userID = userID;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -51,20 +77,7 @@ public class UserDto {
         this.money = money;
         this.userRole = userRole;
         this.userStatus = userStatus;
-    }
-
-    @JsonCreator
-    public UserDto(Long userID, String lastName, String firstName, String patronymic,
-                   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday, String emailAddress,
-                   String password, Float money) {
-        this.userID = userID;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
-        this.birthday = birthday;
-        this.emailAddress = emailAddress;
-        this.password = password;
-        this.money = money;
+        this.projects = projects;
     }
 
     public UserDto(String lastName, String firstName) {
@@ -152,19 +165,28 @@ public class UserDto {
         this.userStatus = userStatus;
     }
 
+    public void setProjects(Set<ProjectDto> projects) {
+        this.projects = projects;
+    }
+
+    public Set<ProjectDto> getProjects() {
+        return projects;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
-            "userID=" + userID +
-            ", lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", patronymic='" + patronymic + '\'' +
-            ", birthday=" + birthday +
-            ", emailAddress='" + emailAddress + '\'' +
-            ", password='" + password + '\'' +
-            ", money=" + money +
-            ", userRole=" + userRole +
-            ", userStatus=" + userStatus +
-            '}';
+          "userID=" + userID +
+          ", lastName='" + lastName + '\'' +
+          ", firstName='" + firstName + '\'' +
+          ", patronymic='" + patronymic + '\'' +
+          ", birthday=" + birthday +
+          ", emailAddress='" + emailAddress + '\'' +
+          ", password='" + password + '\'' +
+          ", money=" + money +
+          ", userRole=" + userRole +
+          ", userStatus=" + userStatus +
+          ", projects=" + projects +
+          '}';
     }
 }

@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS PROJECT (
     create_date                         TIMESTAMP NOT NULL,
     hours                               FLOAT4,
     priority                            INT NOT NULL,
-    budget                              FLOAT4
+    budget                              FLOAT4,
+    status                              VARCHAR (50)
 );
-INSERT INTO PROJECT(id, name, comment, create_date, hours, priority, budget) VALUES(1, 'Medical progect', 'Created by Joe Dow', '2021-12-17 16:57:31.886321', 1000.0, 10, 50000.0);

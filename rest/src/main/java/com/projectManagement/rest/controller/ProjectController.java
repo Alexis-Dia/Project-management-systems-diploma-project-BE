@@ -8,12 +8,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import static com.projectManagement.rest.Navigation.CREATE;
 import static com.projectManagement.rest.Navigation.LOAD;
+import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_PROJECTS;
 
 import com.projectManagement.dto.EmptyDto;
 import com.projectManagement.dto.ProjectDto;
+import com.projectManagement.dto.TaskDto;
 import com.projectManagement.filter.ProjectFilter;
 import com.projectManagement.service.ProjectService;
-import com.projectManagement.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,13 @@ public class ProjectController {
     public ResponseEntity<?> getProjectsPage(@RequestBody ProjectFilter filter) {
 
         final List<ProjectDto> projects = projectService.findAll();
+        return ResponseEntity.ok(projects);
+    }
+
+    @GetMapping(LOAD_ALL_MINE_PROJECTS)
+    public ResponseEntity<?> getAllMineProjects(@RequestParam("userId") Long userId) {
+
+        final List<ProjectDto> projects = projectService.findAllMineProjects(userId);
         return ResponseEntity.ok(projects);
     }
 

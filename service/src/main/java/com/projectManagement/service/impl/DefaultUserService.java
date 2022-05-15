@@ -5,7 +5,10 @@ import static com.projectManagement.consts.Common.MSG_ERR_GETTING_NOT_CURRENT_US
 import static com.projectManagement.consts.Common.MSG_ERR_USER_ALREADY_EXISTS;
 import static com.projectManagement.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
 
+import com.projectManagement.dto.TaskDto;
 import com.projectManagement.dto.UserDto;
+import com.projectManagement.entity.ProjectEntity;
+import com.projectManagement.entity.TaskEntity;
 import com.projectManagement.entity.UserEntity;
 import com.projectManagement.entity.UserRole;
 import com.projectManagement.entity.UserStatus;
@@ -25,7 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -86,7 +91,7 @@ public class DefaultUserService implements UserService {
         if (!userEntity.isPresent()) {
             return Optional.empty();
         }
-        return Optional.of(DtoMapper.toUserDto(byLogin.stream().findAny().get()));
+        return Optional.of(DtoMapper.toUserDtoWithoutProjects(byLogin.stream().findAny().get()));
     }
 
     @Override

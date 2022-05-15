@@ -6,6 +6,11 @@ import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.PATH_AUTH_AUTHENTICATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_CREATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD;
+import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD_ALL_MINE;
+import static com.projectManagement.rest.Navigation.PATH_REPORT_LOAD;
+import static com.projectManagement.rest.Navigation.PATH_TASK_CREATE;
+import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD;
+import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD_ALL_MINE;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL_DRIVERS;
 import static com.projectManagement.rest.Navigation.PATH_USER_CHANGE_STATUS;
@@ -143,7 +148,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous()
                 .antMatchers(HttpMethod.PUT, PATH_USER_EDIT_ME).hasAuthority(ROLE_DRIVER)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_ME).hasAuthority(ROLE_DRIVER)
-                .antMatchers(HttpMethod.GET, PATH_USER_ALL).hasAuthority(ROLE_ADMIN)
+                //.antMatchers(HttpMethod.GET, PATH_USER_ALL).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_USER_ALL).anonymous()
                 .antMatchers(HttpMethod.POST, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_BY_ID).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_USER_GET_ADMIN).hasAuthority(ROLE_ADMIN)
@@ -153,7 +159,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //TODO: Fix it after chacking that login is working
                 .antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
-                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAnyAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_TASK_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_PROJECT_LOAD_ALL_MINE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_REPORT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                //.antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).anonymous()
+                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
 
                 .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
                 //.antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous();

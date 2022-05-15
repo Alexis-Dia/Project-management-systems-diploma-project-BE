@@ -4,7 +4,11 @@ public interface Navigation {
 
   String USER = "/user";
   String PROJECT = "/project";
+  String TASK = "/task";
+  String REPORT = "/rept";
   String LOAD = "/load";
+  String LOAD_ALL_MINE_TASKS = "/loadAllMine";
+  String LOAD_ALL_MINE_PROJECTS = "/loadAllMine";
   String CREATE = "/create";
 
   String PATH_AUTH_AUTHENTICATE = "/auth/authenticate";
@@ -23,4 +27,12 @@ public interface Navigation {
 
   String PATH_PROJECT_LOAD = PROJECT + LOAD;
   String PATH_PROJECT_CREATE = PROJECT + CREATE;
+
+  String PATH_TASK_LOAD = TASK + LOAD;
+  String PATH_TASK_CREATE = TASK + CREATE;
+  String PATH_TASK_LOAD_ALL_MINE = TASK + LOAD_ALL_MINE_TASKS;
+  String PATH_PROJECT_LOAD_ALL_MINE = PROJECT + LOAD_ALL_MINE_PROJECTS;
+
+  String PATH_REPORT_LOAD = REPORT + LOAD;
+  String PATH_REPORT_CREATE = REPORT + CREATE;
 }
