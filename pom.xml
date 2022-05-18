@@ -41,6 +41,7 @@
         <mockito.version>4.0.0</mockito.version>
         <testcontainers.version>1.13.0</testcontainers.version>
         <archunit.version>0.21.0</archunit.version>
+        <jjwt.version>0.9.0</jjwt.version>
     </properties>
 
     <dependencyManagement>

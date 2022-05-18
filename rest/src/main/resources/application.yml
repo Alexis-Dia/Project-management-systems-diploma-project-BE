@@ -24,3 +24,12 @@ spring:
     baseline-on-migrate: true
     locations: '/db/common,/db/test'
     check-location: false
+
+authentication:
+  jwt:
+    header: "Authorization"
+    prefix: "Bearer"
+    secret: "golosanswers2jwt"
+    lifeTime: 600000
+    range: 120
+    responseHeader: "Access-Token"

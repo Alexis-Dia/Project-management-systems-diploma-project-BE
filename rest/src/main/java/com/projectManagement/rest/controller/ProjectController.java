@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+import static com.projectManagement.rest.Navigation.CREATE_PROJECT;
 import static com.projectManagement.rest.Navigation.CREATE_REPORT;
 import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_PROJECTS;
@@ -65,7 +66,7 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
-    @PutMapping(CREATE_REPORT)
+    @PutMapping(CREATE_PROJECT)
     public ResponseEntity<?> createProject(@RequestBody ProjectDto project) {
 
         projectService.createProject(project);

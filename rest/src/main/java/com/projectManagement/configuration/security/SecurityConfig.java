@@ -35,12 +35,17 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -68,6 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider);
     }
+
+    @Autowired
+    private TokenComponent tokenComponent;
 
     @Autowired
     private UserService userService;
@@ -98,6 +106,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManager();
+    }
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Autowired
     @Qualifier("oauth2ClientContext")
     private OAuth2ClientContext oAuth2ClientContext;
@@ -123,6 +140,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         registration.setFilter(oAuth2ClientContextFilter);
         registration.setOrder(-100);
         return registration;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+
+        return new GolosanswersPasswordEncoder();
     }
 
     private Filter ssoFilter()
@@ -161,6 +184,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //TODO: Fix it after chacking that login is working
                 .antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_TASK_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_IN_PROGRESS).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_NEW).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
@@ -170,11 +194,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, PATH_REPORT_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_TASK_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 //.antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).anonymous()
-                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
-                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
-                .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
 
-                .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
+                .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()
+          .and()
+          .addFilterBefore(new TokenAuthenticationFilter(tokenComponent, userDetailsService), UsernamePasswordAuthenticationFilter.class);;
                 //.antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous();
 
                 /* From my point of view it means that any request except all above will demand basic auth
@@ -183,6 +206,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .addFilterBefore(ssoFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+
+        web
+          .ignoring()
+          .antMatchers(PATH_AUTH_AUTHENTICATE);
     }
 
 }

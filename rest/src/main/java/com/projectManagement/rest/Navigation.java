@@ -11,6 +11,7 @@ public interface Navigation {
   String LOAD_ALL_MINE_NEW_TASKS_NEW = "/loadAllMineNew";
   String LOAD_ALL_MINE_PROJECTS = "/loadAllMine";
   String CREATE_REPORT = "/createReport/{taskId}";
+  String CREATE_PROJECT = "/createProject";
   String CREATE_TASK = "/createTask/{projectId}";
 
   String PATH_AUTH_AUTHENTICATE = "/auth/authenticate";
@@ -30,7 +31,7 @@ public interface Navigation {
   String GET_BY_TASK_ID = "/getByTaskId";
 
   String PATH_PROJECT_LOAD = PROJECT + LOAD;
-  String PATH_PROJECT_CREATE = PROJECT + CREATE_REPORT;
+  String PATH_PROJECT_CREATE = PROJECT + CREATE_PROJECT;
 
   String PATH_TASK_LOAD = TASK + LOAD;
   String PATH_TASK_CREATE = TASK + CREATE_REPORT;

@@ -4,12 +4,16 @@ import static com.projectManagement.consts.Common.MSG_ERR_INCORRECT_PASSORD;
 import static com.projectManagement.consts.Common.MSG_ERR_USER_ALREADY_EXISTS;
 import static com.projectManagement.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
 
+import com.projectManagement.configuration.security.TokenAuthentication;
+import com.projectManagement.dto.HandshakeDto;
 import com.projectManagement.dto.UserDto;
 import com.projectManagement.service.UserService;
 import com.projectManagement.service.exceptions.UserAlreadyExistsException;
 import com.projectManagement.service.exceptions.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +26,14 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @GetMapping("/authenticate")
-    public UserDto authenticate(@RequestParam("emailAddress") String emailAddress, @RequestParam("password") String password) {
+    public HandshakeDto authenticate(@RequestParam("emailAddress") String emailAddress, @RequestParam("password") String password) {
+
+        TokenAuthentication authentication = (TokenAuthentication)
+          authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(emailAddress, password));
 
         Optional<UserDto> userByLogin = userService.findByLogin(emailAddress);
 
@@ -31,14 +41,22 @@ public class AuthenticationController {
             throw new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND);
         }
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String decodedPassword = userByLogin.get().getPassword();
-        if (!bCryptPasswordEncoder.matches(password, decodedPassword)) {
-            throw new UserNotFoundException(MSG_ERR_INCORRECT_PASSORD);
-        }
+        //return new HandshakeDto(authentication.getToken(), user.getRole().access(), user.getUsername(), user.getLanguage());
+        HandshakeDto handshakeDto = new HandshakeDto(authentication.getToken(), userByLogin.get());
+        return handshakeDto;
 
-        userByLogin.get().setPassword(password);
-        return userByLogin.get();
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String decodedPassword = userByLogin.get().getPassword();
+//        if (!bCryptPasswordEncoder.matches(password, decodedPassword)) {
+//            throw new UserNotFoundException(MSG_ERR_INCORRECT_PASSORD);
+//        }
+//
+////        TokenAuthentication authentication = (TokenAuthentication) authenticationManager.
+////          .authenticate(new UsernamePasswordAuthenticationToken(emailAddress, password));
+//
+//        authenticationManager
+//        userByLogin.get().setPassword(password);
+//        return userByLogin.get();
     }
 
     @PostMapping("/checkUser")
