@@ -32,7 +32,7 @@ public class ProjectEntity implements Serializable {
   @JoinTable(name = "project_to_user", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<UserEntity> users;
 
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
   @JoinColumn(name = "project_id")
   private Set<TaskEntity> tasks;
 

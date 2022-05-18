@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS TASK (
     name                                VARCHAR (100) NOT NULL,
     comment                             VARCHAR(500),
     create_date                         TIMESTAMP NOT NULL,
-    project_id                          BIGINT NOT NULL,
+    project_id                          BIGINT, /*WE CAN'T USE HERE 'NOT NULL'-CONSTRAINT*/
     FOREIGN KEY (project_id)            REFERENCES project,
     status                              VARCHAR (50)
 );

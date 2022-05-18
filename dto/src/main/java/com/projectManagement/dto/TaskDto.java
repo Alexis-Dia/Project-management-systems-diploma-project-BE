@@ -10,12 +10,23 @@ import java.util.Set;
 
 public class TaskDto {
 
-  private final Long id;
-  private final String name;
-  private final String comment;
-  private final String status;
-  private final LocalDateTime createDate;
-  private final Set<ReportDto> reports;
+  private  Long id;
+  private  String name;
+  private  String comment;
+  private  String status;
+  private  LocalDateTime createDate;
+  private  Set<ReportDto> reports;
+
+//  @JsonCreator
+//  public TaskDto(
+//    @JsonProperty("name") String name,
+//    @JsonProperty("comment") String comment,
+//    @JsonProperty("createDate") @JsonFormat(pattern = DateUtils.JSON_DATE_TIME_FORMAT) LocalDateTime createDate
+//  ) {
+//    this.name = name;
+//    this.comment = comment;
+//    this.createDate = createDate;
+//  }
 
   @JsonCreator
   public TaskDto(

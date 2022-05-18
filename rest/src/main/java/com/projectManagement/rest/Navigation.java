@@ -5,11 +5,13 @@ public interface Navigation {
   String USER = "/user";
   String PROJECT = "/project";
   String TASK = "/task";
-  String REPORT = "/rept";
+  String REPORT = "/report";
   String LOAD = "/load";
-  String LOAD_ALL_MINE_TASKS = "/loadAllMine";
+  String LOAD_ALL_MINE_TASKS_IN_PROGRESS = "/loadAllMineInProgress";
+  String LOAD_ALL_MINE_NEW_TASKS_NEW = "/loadAllMineNew";
   String LOAD_ALL_MINE_PROJECTS = "/loadAllMine";
-  String CREATE = "/create";
+  String CREATE_REPORT = "/createReport/{taskId}";
+  String CREATE_TASK = "/createTask/{projectId}";
 
   String PATH_AUTH_AUTHENTICATE = "/auth/authenticate";
   String PATH_USER_SIGN_UP = "/user/signUp";
@@ -25,14 +27,18 @@ public interface Navigation {
   String PATH_USER_CHANGE_STATUS = "/user/changeStatus";
   String PATH_USER_DELETE = "/user/delete";
 
+  String GET_BY_TASK_ID = "/getByTaskId";
+
   String PATH_PROJECT_LOAD = PROJECT + LOAD;
-  String PATH_PROJECT_CREATE = PROJECT + CREATE;
+  String PATH_PROJECT_CREATE = PROJECT + CREATE_REPORT;
 
   String PATH_TASK_LOAD = TASK + LOAD;
-  String PATH_TASK_CREATE = TASK + CREATE;
-  String PATH_TASK_LOAD_ALL_MINE = TASK + LOAD_ALL_MINE_TASKS;
+  String PATH_TASK_CREATE = TASK + CREATE_REPORT;
+  String PATH_TASK_LOAD_ALL_MINE_IN_PROGRESS = TASK + LOAD_ALL_MINE_TASKS_IN_PROGRESS;
+  String PATH_TASK_LOAD_ALL_MINE_NEW = TASK + LOAD_ALL_MINE_NEW_TASKS_NEW;
   String PATH_PROJECT_LOAD_ALL_MINE = PROJECT + LOAD_ALL_MINE_PROJECTS;
+  String PATH_REPORT_GET_BY_TASK_ID = REPORT + GET_BY_TASK_ID;
 
   String PATH_REPORT_LOAD = REPORT + LOAD;
-  String PATH_REPORT_CREATE = REPORT + CREATE;
+  String PATH_REPORT_CREATE = REPORT + CREATE_REPORT;
 }

@@ -8,5 +8,7 @@ public interface ReportService {
 
   List<ReportDto> findAll();
 
-  void createReport(ReportDto report);
+  List<ReportDto> findAllMineReportsByTaskId(Long userId, Long taskId);
+
+  void createReport(Long taskId, ReportDto report);
 }

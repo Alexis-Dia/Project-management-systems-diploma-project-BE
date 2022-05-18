@@ -2,15 +2,17 @@ package com.projectManagement.configuration.security;
 
 import static com.projectManagement.consts.Common.ROLE_ADMIN;
 import static com.projectManagement.consts.Common.ROLE_DRIVER;
-import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.PATH_AUTH_AUTHENTICATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_CREATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD_ALL_MINE;
+import static com.projectManagement.rest.Navigation.PATH_REPORT_CREATE;
+import static com.projectManagement.rest.Navigation.PATH_REPORT_GET_BY_TASK_ID;
 import static com.projectManagement.rest.Navigation.PATH_REPORT_LOAD;
 import static com.projectManagement.rest.Navigation.PATH_TASK_CREATE;
 import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD;
-import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD_ALL_MINE;
+import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD_ALL_MINE_IN_PROGRESS;
+import static com.projectManagement.rest.Navigation.PATH_TASK_LOAD_ALL_MINE_NEW;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL;
 import static com.projectManagement.rest.Navigation.PATH_USER_ALL_DRIVERS;
 import static com.projectManagement.rest.Navigation.PATH_USER_CHANGE_STATUS;
@@ -160,9 +162,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //TODO: Fix it after chacking that login is working
                 .antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_TASK_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
-                .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_IN_PROGRESS).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_NEW).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_PROJECT_LOAD_ALL_MINE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_REPORT_GET_BY_TASK_ID).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_REPORT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_REPORT_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_TASK_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 //.antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).anonymous()
                 .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.PUT, PATH_PROJECT_CREATE).hasAuthority(ROLE_ADMIN)

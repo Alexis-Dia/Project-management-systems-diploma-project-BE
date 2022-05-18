@@ -9,7 +9,9 @@ public interface TaskService {
 
   List<TaskDto> findAll();
 
-  List<TaskDto> findAllMineTasks(Long userId);
+  List<TaskDto> findAllMineCurrentTasksInProgress(Long userId);
 
-  void createTask(TaskDto task);
+  List<TaskDto> findAllMineNewTasks(Long userId);
+
+  void createTask(Long projectId, TaskDto task);
 }

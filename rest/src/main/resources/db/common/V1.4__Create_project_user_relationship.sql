@@ -13,12 +13,6 @@ CREATE TABLE IF NOT EXISTS PROJECT_TO_USER (
     FOREIGN KEY (user_id)               REFERENCES users
 );
 
-
-
-
-
-INSERT INTO PROJECT(id, name, comment, create_date, hours, priority, budget, status) VALUES(1, 'Medical progect', 'Created by Joe Dow', '2021-12-17 16:57:31.886321', 1000.0, 10, 50000.0, 'NEW');
-
 /*PASSWORD - 12345678*/
 INSERT INTO USERS (id, last_name, first_name, patronymic, birthday, login, password, money, role, status)
 VALUES (1,
@@ -45,11 +39,6 @@ VALUES (2,
         'FREE'
 );
 
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(1, 'Task 1', 'Created by Joe Dow', '2021-12-17 17:57:31.886321', 1, 'NEW');
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(2, 'Task 2', 'Created by Joe Dow', '2021-12-17 18:57:31.886321', 1, 'NEW');
-
-INSERT INTO PROJECT_TO_USER(id, project_id, user_id) VALUES(1, 1, 1);
-INSERT INTO PROJECT_TO_USER(id, project_id, user_id) VALUES(2, 1, 2);
 
 
 
