@@ -12,11 +12,11 @@ INSERT INTO PROJECT(id, name, comment, create_date, hours, priority, budget, sta
 INSERT INTO PROJECT(id, name, comment, create_date, hours, priority, budget, status) VALUES(2, 'Car auction project', 'Created by Joe Dow', '2021-12-17 16:57:31.886321', 1000.0, 10, 50000.0, 'NEW');
 INSERT INTO PROJECT(id, name, comment, create_date, hours, priority, budget, status) VALUES(3, 'House renting project', 'Created by Joe Dow', '2021-12-17 16:57:31.886321', 1000.0, 10, 50000.0, 'NEW');
 
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(1, 'Task 1', 'Created by Joe Dow', '2021-12-17 17:57:31.886321', 1, 'New');
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(2, 'Task 2', 'Created by Joe Dow', '2021-12-17 17:57:31.886321', 1, 'New');
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(3, 'Task 2', 'Created by Joe Dow', '2021-12-17 18:57:31.886321', 1, 'In progress');
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(4, 'Task 3', 'Created by Joe Dow', '2021-12-17 19:57:31.886321', 1, 'On hold');
-INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(5, 'Task 1', 'Created by Joe Dow', '2021-12-17 19:57:31.886321', 1, 'Finished');
+INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(1, 'Task 1', 'Created by Joe Dow', '2021-12-17 17:57:31.886321', 1, 'NEW');
+INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(2, 'Task 2', 'Created by Joe Dow', '2021-12-17 17:57:31.886321', 1, 'NEW');
+INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(3, 'Task 2', 'Created by Joe Dow', '2021-12-17 18:57:31.886321', 1, 'IN_PROGRESS');
+INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(4, 'Task 3', 'Created by Joe Dow', '2021-12-17 19:57:31.886321', 1, 'ON_HOLD');
+INSERT INTO TASK(id, name, comment, create_date, project_id, status) VALUES(5, 'Task 1', 'Created by Joe Dow', '2021-12-17 19:57:31.886321', 1, 'FINISHED');
 
 INSERT INTO PROJECT_TO_USER(id, project_id, user_id) VALUES(1, 1, 1);
 INSERT INTO PROJECT_TO_USER(id, project_id, user_id) VALUES(2, 1, 2);

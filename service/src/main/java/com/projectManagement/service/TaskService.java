@@ -14,4 +14,6 @@ public interface TaskService {
   List<TaskDto> findAllMineNewTasks(Long userId);
 
   void createTask(Long projectId, TaskDto task);
+
+  TaskDto changeTaskStatus(Long taskId, String status, String email);
 }

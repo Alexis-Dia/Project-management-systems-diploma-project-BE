@@ -6,10 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+import static com.projectManagement.rest.Navigation.ADD_USER;
 import static com.projectManagement.rest.Navigation.CREATE_PROJECT;
 import static com.projectManagement.rest.Navigation.CREATE_REPORT;
 import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_PROJECTS;
+import static com.projectManagement.rest.Navigation.REMOVE_USER;
 
 import com.projectManagement.dto.EmptyDto;
 import com.projectManagement.dto.ProjectDto;
@@ -71,5 +73,19 @@ public class ProjectController {
 
         projectService.createProject(project);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(ADD_USER)
+    public ResponseEntity<?> addUserToTheProject(@RequestParam("projectId") Long projectId, @RequestParam("userId") Long userId) {
+
+        final ProjectDto projectDto = projectService.addUserToTheProject(userId, projectId);
+        return ResponseEntity.ok(projectDto);
+    }
+
+    @GetMapping(REMOVE_USER)
+    public ResponseEntity<?> removeUserFromTheProject(@RequestParam("projectId") Long projectId, @RequestParam("userId") Long userId) {
+
+        final ProjectDto projectDto = projectService.removeUserFromTheProject(userId, projectId);
+        return ResponseEntity.ok(projectDto);
     }
 }

@@ -15,4 +15,8 @@ public interface ProjectService {
   List<ProjectDto> findAllMineProjects(Long userId);
 
   void createProject(ProjectDto project);
+
+  ProjectDto addUserToTheProject(Long userId, Long projectId);
+
+  ProjectDto removeUserFromTheProject(Long userId, Long projectId);
 }

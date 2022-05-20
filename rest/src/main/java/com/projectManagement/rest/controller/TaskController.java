@@ -1,5 +1,6 @@
 package com.projectManagement.rest.controller;
 
+import static com.projectManagement.rest.Navigation.CHANGE_TASK_STATUS;
 import static com.projectManagement.rest.Navigation.CREATE_TASK;
 import static com.projectManagement.rest.Navigation.LOAD;
 import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_NEW_TASKS_NEW;
@@ -10,6 +11,8 @@ import com.projectManagement.service.TaskService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +61,15 @@ public class TaskController {
 
         taskService.createTask(projectId, task);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(CHANGE_TASK_STATUS)
+    public ResponseEntity<?> changeTaskStatus(@RequestParam("taskId") Long taskId, @RequestParam("status") String status) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final String email = auth.getName();
+
+        final TaskDto taskDto = taskService.changeTaskStatus(taskId, status, email);
+        return ResponseEntity.ok(taskDto);
     }
 }

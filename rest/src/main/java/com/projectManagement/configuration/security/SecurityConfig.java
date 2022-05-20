@@ -2,7 +2,11 @@ package com.projectManagement.configuration.security;
 
 import static com.projectManagement.consts.Common.ROLE_ADMIN;
 import static com.projectManagement.consts.Common.ROLE_DRIVER;
+import static com.projectManagement.rest.Navigation.CHANGE_TASK_STATUS;
 import static com.projectManagement.rest.Navigation.PATH_AUTH_AUTHENTICATE;
+import static com.projectManagement.rest.Navigation.PATH_CHANGE_TASK_STATUS;
+import static com.projectManagement.rest.Navigation.PATH_METHOD_GET_ADD_USER_TO_THE_PROJECT;
+import static com.projectManagement.rest.Navigation.PATH_METHOD_GET_REMOVE_USER_FROM_THE_PROJECT;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_CREATE;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD;
 import static com.projectManagement.rest.Navigation.PATH_PROJECT_LOAD_ALL_MINE;
@@ -189,10 +193,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_IN_PROGRESS).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_TASK_LOAD_ALL_MINE_NEW).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_PROJECT_LOAD_ALL_MINE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_METHOD_GET_ADD_USER_TO_THE_PROJECT).hasAuthority(ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, PATH_METHOD_GET_REMOVE_USER_FROM_THE_PROJECT).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.GET, PATH_REPORT_GET_BY_TASK_ID).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_REPORT_LOAD).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_REPORT_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, PATH_TASK_CREATE).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
+                .antMatchers(HttpMethod.POST, PATH_CHANGE_TASK_STATUS).hasAnyAuthority(ROLE_DRIVER, ROLE_ADMIN)
                 //.antMatchers(HttpMethod.POST, PATH_PROJECT_LOAD).anonymous()
 
                 .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()

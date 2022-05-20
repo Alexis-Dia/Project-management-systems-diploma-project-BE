@@ -4,6 +4,8 @@ import com.projectManagement.dto.TaskDto;
 import com.projectManagement.entity.ProjectEntity;
 import com.projectManagement.entity.ReportEntity;
 import com.projectManagement.entity.TaskEntity;
+import com.projectManagement.entity.UserEntity;
+import com.projectManagement.entity.UserStatus;
 import com.projectManagement.repository.ProjectRepository;
 import com.projectManagement.repository.TaskRepository;
 import com.projectManagement.repository.UserRepository;
@@ -43,7 +45,7 @@ public class DefaultTaskService implements TaskService {
     return userRepository.findById(userId).stream()
       .flatMap((ob) -> ob.getProjects().stream())
       .flatMap(ob -> ob.getTasks().stream())
-      .filter(ob -> ob.getStatus().equals("In progress") || ob.getStatus().equals("On hold"))
+      .filter(ob -> ob.getStatus().equals("IN_PROGRESS") || ob.getStatus().equals("FINISHED"))
       .sorted(Comparator.comparing(TaskEntity::getId))
       .map(DtoMapper::toTaskDto)
       .collect(Collectors.toList());
@@ -55,22 +57,37 @@ public class DefaultTaskService implements TaskService {
     return userRepository.findById(userId).stream()
       .flatMap((ob) -> ob.getProjects().stream())
       .flatMap(ob -> ob.getTasks().stream())
-      .filter(ob -> ob.getStatus().equals("New"))
+      .filter(ob -> ob.getStatus().equals("NEW") || ob.getStatus().equals("ON_HOLD") || ob.getStatus().equals("FINISHED"))
       .sorted(Comparator.comparing(TaskEntity::getId))
       .map(DtoMapper::toTaskDto)
       .collect(Collectors.toList());
   }
 
   @Override
-  //@Transactional(propagation = Propagation.REQUIRES_NEW)
   @Transactional
   public void createTask(Long projectId, TaskDto task) {
     final TaskEntity entity = DtoMapper.toTaskEntity(task);
-    entity.setStatus("New");
+    entity.setStatus("NEW");
     final Optional<ProjectEntity> project = projectRepository.findById(projectId);
     final ProjectEntity projectEntity = project.get();
     final Set<TaskEntity> tasks = projectEntity.getTasks();
     tasks.add(entity);
     projectRepository.save(projectEntity);
+  }
+
+  @Override
+  @Transactional
+  public TaskDto changeTaskStatus(Long taskId, String status, String email) {
+    final TaskEntity task = taskRepository.findById(taskId).get();
+    task.setStatus(status);
+    final TaskEntity entity = taskRepository.save(task);
+    final UserEntity user = userRepository.findByLogin(email).get();
+    if (status == "IN_PROGRESS") {
+      user.setStatus(UserStatus.BUSY);
+    } else {
+      user.setStatus(UserStatus.FREE);
+    }
+
+    return DtoMapper.toTaskDto(entity);
   }
 }
