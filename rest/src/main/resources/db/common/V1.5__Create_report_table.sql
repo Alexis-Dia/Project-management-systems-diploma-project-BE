@@ -23,3 +23,4 @@ INSERT INTO PROJECT_TO_USER(id, project_id, user_id) VALUES(2, 1, 2);
 
 INSERT INTO REPORT(id, name, comment, create_date, task_id) VALUES(1, 'Created repository-layer', 'Created by Ivan Ivanov', '2021-12-17 17:57:31.886321', 3);
 INSERT INTO REPORT(id, name, comment, create_date, task_id) VALUES(2, 'Created service-layer', 'Created by Ivan Ivanov', '2021-12-17 18:57:31.886321', 3);
+INSERT INTO REPORT(id, name, comment, create_date, task_id) VALUES(3, 'Created all Refactoring', 'Created by Ivan Ivanov', '2021-12-18 18:57:31.886321', 5);
