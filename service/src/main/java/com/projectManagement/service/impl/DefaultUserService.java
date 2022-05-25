@@ -5,10 +5,7 @@ import static com.projectManagement.consts.Common.MSG_ERR_GETTING_NOT_CURRENT_US
 import static com.projectManagement.consts.Common.MSG_ERR_USER_ALREADY_EXISTS;
 import static com.projectManagement.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
 
-import com.projectManagement.dto.TaskDto;
 import com.projectManagement.dto.UserDto;
-import com.projectManagement.entity.ProjectEntity;
-import com.projectManagement.entity.TaskEntity;
 import com.projectManagement.entity.UserEntity;
 import com.projectManagement.entity.UserRole;
 import com.projectManagement.entity.UserStatus;
@@ -28,9 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -124,14 +119,14 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public UserDto changeUserStatus(Long userId, String userStatus) {
+    @Transactional
+    public UserDto changeUserStatus(Long userId, UserStatus userStatus) {
+        UserEntity user = userRepository.getById(userId);
+        user.setStatus(userStatus);
+        userRepository.save(user);
+        //userRepository.updateUserEntity(userId, userStatus.name());
 
-        userRepository.updateUserStatus(userId, userStatus);
-
-        return DtoMapper.toUserDto(userRepository.findAllByIdAndStatus(userId, DRIVER).orElseThrow(
-            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
-        ));
+        return DtoMapper.toUserDto(user);
     }
 
     @Override
@@ -175,7 +170,7 @@ public class DefaultUserService implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {RuntimeException.class})
     public void transferMoney(Long userId, Float amount) throws Exception {
-        userRepository.updateUserStatus(userId, UserStatus.FREE.name());
+        userRepository.updateUserEntity(userId, UserStatus.FREE.name());
         userServiceProxy.withdraw(ADMIN_ID, amount);
         userServiceProxy.deposit(userId, amount);
     }

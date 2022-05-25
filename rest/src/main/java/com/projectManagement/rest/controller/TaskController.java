@@ -7,7 +7,11 @@ import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_NEW_TASKS_NEW;
 import static com.projectManagement.rest.Navigation.LOAD_ALL_MINE_TASKS_IN_PROGRESS;
 
 import com.projectManagement.dto.TaskDto;
+import com.projectManagement.dto.UserDto;
+import com.projectManagement.entity.TaskEntity;
+import com.projectManagement.entity.UserStatus;
 import com.projectManagement.service.TaskService;
+import com.projectManagement.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/task")
@@ -34,6 +39,9 @@ public class TaskController {
 
     @Autowired
     TaskService taskService;
+
+    @Autowired
+    UserService userService;
 
     @PostMapping(LOAD)
     public ResponseEntity<?> getAllTasks() {

@@ -39,7 +39,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Modifying
     @Query("UPDATE UserEntity userEntity SET userEntity.status = ?2 WHERE userEntity.id = ?1")
-    Integer updateUserStatus(Long userId, String userStatus);
+    Integer updateUserEntity(Long userId, String status);
 
     void deleteById(Long userId);
 

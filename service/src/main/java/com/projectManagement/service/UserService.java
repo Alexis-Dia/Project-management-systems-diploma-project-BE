@@ -1,6 +1,7 @@
 package com.projectManagement.service;
 
 import com.projectManagement.dto.UserDto;
+import com.projectManagement.entity.UserStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public interface UserService {
 
   UserDto editMe(UserDto userDto, String authenticationName);
 
-  UserDto changeUserStatus(Long userId, String userStatus);
+  UserDto changeUserStatus(Long userId, UserStatus userStatus);
 
   List<UserDto> deleteUser(Long userId);
 

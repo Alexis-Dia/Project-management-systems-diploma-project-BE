@@ -1,6 +1,7 @@
 package com.projectManagement.service.impl;
 
 import com.projectManagement.dto.TaskDto;
+import com.projectManagement.dto.UserDto;
 import com.projectManagement.entity.ProjectEntity;
 import com.projectManagement.entity.ReportEntity;
 import com.projectManagement.entity.TaskEntity;
@@ -82,9 +83,10 @@ public class DefaultTaskService implements TaskService {
     task.setStatus(status);
     final TaskEntity entity = taskRepository.save(task);
     final UserEntity user = userRepository.findByLogin(email).get();
-    if (status == "IN_PROGRESS") {
+    if (status.equals("IN_PROGRESS") || status.equals("ON_HOLD")) {
       user.setStatus(UserStatus.BUSY);
-    } else {
+    }
+    if(status.equals("FINISHED")) {
       user.setStatus(UserStatus.FREE);
     }
 

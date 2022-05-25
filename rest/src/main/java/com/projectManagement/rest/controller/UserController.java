@@ -81,7 +81,7 @@ public class UserController {
     @PutMapping("/changeStatus")
     public UserDto changeUserStatus(@RequestBody UserDto userDto) {
 
-        final UserDto user = userService.changeUserStatus(userDto.getUserID(), userDto.getUserStatus().name());
+        final UserDto user = userService.changeUserStatus(userDto.getUserID(), userDto.getUserStatus());
 
         return user;
     }
