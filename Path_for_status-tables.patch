@@ -55,7 +55,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 ===================================================================
 diff --git a/rest/src/main/resources/db/common/V1.3__Create_task_table.sql b/rest/src/main/resources/db/common/V1.3__Create_task_table.sql
 --- a/rest/src/main/resources/db/common/V1.3__Create_task_table.sql	(revision 7ba2ceeebc6528b47d5b8de1c2b89e20b6d5178f)
-+++ b/rest/src/main/resources/db/common/V1.3__Create_task_table.sql	(date 1653766698528)
++++ b/rest/src/main/resources/db/common/V1.3__Create_task_table.sql	(date 1653768097664)
 @@ -1,3 +1,13 @@
 +CREATE TABLE IF NOT EXISTS TASK_STATUS (
 +task_id                          BIGINT NOT NULL PRIMARY KEY,
@@ -76,7 +76,7 @@ diff --git a/rest/src/main/resources/db/common/V1.3__Create_task_table.sql b/res
      FOREIGN KEY (project_id)            REFERENCES project,
 -    status                              VARCHAR (50)
 +    status                              BIGINT,
-+    FOREIGN KEY (status)                REFERENCES PROJECT_STATUS
++    FOREIGN KEY (status)                REFERENCES TASK_STATUS
  );
 Index: rest/src/main/resources/db/common/V1.2__Create_project_table.sql
 IDEA additional info:
